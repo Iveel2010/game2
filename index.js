@@ -1,7 +1,13 @@
-const letters = document.getElementById("letters");
+const letterContainer = document.getElementById("letters");
+letterContainer.className = "letterContainer";
 const text = document.getElementById("text");
-const live = document.getElementById("live");
-let arr = [
+const point = document.getElementById("point");
+
+const letterv = document.getElementById("letterv");
+letterv.className = "letterv";
+const animalword = ["monkey", "dog", "cat", "whale", "tiger", "chicken"];
+const word = animalword[Math.floor(Math.random() * animalword.length)];
+let letters = [
   "a",
   "b",
   "c",
@@ -29,29 +35,35 @@ let arr = [
   "y",
   "z",
 ];
-const letter = document.createElement("button");
-const div = document.createElement("span");
-const selectedWord = document.getElementById("selectedword");
-let selectedWordarr = "hello";
-
-for (let i = 0; i < arr.length; i++) {
+let result = 10;
+point.innerHTML = `point: ${result}`;
+for (let i = 0; i < letters.length; i++) {
   const letter = document.createElement("button");
-  letter.innerHTML = arr[i];
-  letters.appendChild(letter);
+  letter.id = letters[i];
   letter.className = "letter";
-  letter.id = arr[i];
+  letter.innerHTML = letters[i];
+  letterContainer.appendChild(letter);
   letter.addEventListener("click", function () {
-    for (let j = 0; j < selectedWordarr.length; i++) {
-      if (selectedWordarr[i] === arr[i]) {
-        div.innerHTML = selectedWordarr[i];
-        console.log(selectedWordarr[i]);
-      } else {
+    for (let j = 0; j < word.length; j++) {
+      if (word[j] === letters[i]) {
+        console.log(word[j]);
+        const indexof = word.indexOf(word[j], [j]);
+        const boo = document.getElementById(indexof);
+        boo.innerHTML = word[j];
+      }
+      if (word[j] !== letters[i]) {
+        result += -0.2;
+        point.innerHTML = `point: ${Math.floor(result)}`;
       }
     }
+    letter.disabled = true;
+    letter.style.opacity = "0.2";
+    letter.style.backgroundColor = "white";
   });
 }
-for (let i = 0; i < selectedWordarr.length; i++) {
-  const div = document.createElement("span");
-  text.appendChild(div);
-  div.innerHTML = "_";
+for (let i = 0; i < word.length; i++) {
+  const bottonBorder = document.createElement("span");
+  letterv.appendChild(bottonBorder);
+  bottonBorder.id = [i];
+  bottonBorder.innerHTML = "_";
 }
